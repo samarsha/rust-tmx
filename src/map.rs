@@ -96,7 +96,11 @@ pub struct Map {
     #[serde(rename = "renderorder", alias = "$renderorder")]
     pub render_order: RenderOrder,
     /// The compression level to use for tile layer data (defaults to -1, which means to use the algorithm default).
-    #[serde(rename = "compressionlevel", default = "default_compression_level")]
+    #[serde(
+        rename = "compressionlevel",
+        default = "default_compression_level",
+        deserialize_with = "deserialize_number_from_string"
+    )]
     pub compression_level: i32,
     /// The map width in tiles.
     #[serde(deserialize_with = "deserialize_number_from_string")]

@@ -79,6 +79,90 @@ fn test_xml_animation() {
 
 #[cfg(feature = "xml")]
 #[test]
+fn test_xml_invisible_layer() {
+    let map = r##"
+    <?xml version="1.0" encoding="UTF-8"?>
+    <map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+     <tileset firstgid="1" name="test" tilewidth="16" tileheight="16" tilecount="256" columns="16">
+      <image source="tiles16.png" width="256" height="256"/>
+      <tile id="0" type="Tile">
+       <animation>
+        <frame tileid="0" duration="100"/>
+        <frame tileid="1" duration="100"/>
+       </animation>
+      </tile>
+     </tileset>
+     <layer id="1" name="Tile Layer 1" width="4" height="4" visible="0">
+      <data>
+       <tile gid="1"/>
+       <tile gid="2684354561"/>
+       <tile gid="1"/>
+       <tile gid="2147483649"/>
+       <tile gid="1610612737"/>
+       <tile gid="3221225473"/>
+       <tile gid="1073741825"/>
+       <tile gid="3221225473"/>
+       <tile gid="2147483649"/>
+       <tile gid="3758096385"/>
+       <tile gid="1073741825"/>
+       <tile gid="536870913"/>
+       <tile gid="536870913"/>
+       <tile gid="1073741825"/>
+       <tile gid="3758096385"/>
+       <tile gid="2147483649"/>
+      </data>
+     </layer>
+    </map>
+    "##;
+
+    let tmx = tmx::Map::from_xml(map).unwrap();
+    println!("xml: {:?}", tmx);
+}
+
+#[cfg(feature = "xml")]
+#[test]
+fn test_xml_no_compression_level() {
+    let map = r##"
+    <?xml version="1.0" encoding="UTF-8"?>
+    <map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="4" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+     <tileset firstgid="1" name="test" tilewidth="16" tileheight="16" tilecount="256" columns="16">
+      <image source="tiles16.png" width="256" height="256"/>
+      <tile id="0" type="Tile">
+       <animation>
+        <frame tileid="0" duration="100"/>
+        <frame tileid="1" duration="100"/>
+       </animation>
+      </tile>
+     </tileset>
+     <layer id="1" name="Tile Layer 1" width="4" height="4">
+      <data>
+       <tile gid="1"/>
+       <tile gid="2684354561"/>
+       <tile gid="1"/>
+       <tile gid="2147483649"/>
+       <tile gid="1610612737"/>
+       <tile gid="3221225473"/>
+       <tile gid="1073741825"/>
+       <tile gid="3221225473"/>
+       <tile gid="2147483649"/>
+       <tile gid="3758096385"/>
+       <tile gid="1073741825"/>
+       <tile gid="536870913"/>
+       <tile gid="536870913"/>
+       <tile gid="1073741825"/>
+       <tile gid="3758096385"/>
+       <tile gid="2147483649"/>
+      </data>
+     </layer>
+    </map>
+    "##;
+
+    let tmx = tmx::Map::from_xml(map).unwrap();
+    println!("xml: {:?}", tmx);
+}
+
+#[cfg(feature = "xml")]
+#[test]
 fn test_xml_csv() {
     let map = r##"
     <?xml version="1.0" encoding="UTF-8"?>
